@@ -1,0 +1,36 @@
+{% include 'index.html' %}
+
+{% block title %} Reminder {% endblock %}
+
+
+{% block content %}
+    <h1 class="display-4 mb-4">Reminder app</h1>
+    <form method="post" class="mb-4">
+        <div class="form-group">
+            <label for="text">Напоминание: </label>
+            <input type="text" class="form-control" id="text" name="text"
+                   placeholder="Введите текст напоминания" required>
+        </div>
+        <div class="form-group">
+            <label for="date">Дата: </label>
+            <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+        <div class="form-group">
+            <label for="time">Время: </label>
+            <input type="time" class="form-control" id="time" name="time" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить напоминание</button>
+    </form>
+    <h1><a href="/joke">click</a></h1>
+    {% if upcoming_reminders %}
+        <h2 class="mb-4">Напоминания: </h2>
+        <ul class="list-group">
+            {% for remind in upcoming_reminders %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ remind.text }}
+                <span class="badge badge-secondary">{{ remind.date }} {{ remind.time }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
