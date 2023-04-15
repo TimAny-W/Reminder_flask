@@ -29,6 +29,9 @@
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 {{ remind.text }}
                 <span class="badge badge-secondary">{{ remind.date }} {{ remind.time }}</span>
+                <form action="{{ url_for('delete_reminder',index=remind.index) }}" method="post">
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
             </li>
             {% endfor %}
         </ul>

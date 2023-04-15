@@ -9,6 +9,10 @@ app.secret_key = f'{uuid4()}'  # secret key
 reminders = []
 
 
+@app.route('/delete/<int:index>', methods=['POST'])
+def delete_reminder(index):
+    reminders.pop(index)
+    return redirect(url_for('home'))
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
@@ -21,9 +25,9 @@ def home():
 
         reminders.append(
             {
-             'text': reminder_text,
-             'date': date_obj
-             }
+                'text': reminder_text,
+                'date': date_obj
+            }
         )
         return redirect(url_for('home'))
     now = datetime.now()
@@ -34,7 +38,7 @@ def home():
 
             upcoming_reminders.append(reminder)
 
-    return render_template(r'home.html',upcoming_reminders=upcoming_reminders)
+    return render_template(r'home.html', upcoming_reminders=upcoming_reminders)
 
 
 @app.route('/joke', methods=['GET'])
@@ -43,4 +47,4 @@ def joke_page():
 
 
 if __name__ == '__main__':
-    app.run('127.0.0.1', 5000, True)
+    app.run("127.0.0.1", port=8000, debug=True)
